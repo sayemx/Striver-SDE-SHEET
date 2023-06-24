@@ -1,0 +1,31 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/search-in-bst_8230841?challengeSlug=striver-sde-challenge
+
+
+/*
+    Following is the Binary Tree node structure:
+
+	class BinaryTreeNode<T> {
+	    public T data;
+	    public BinaryTreeNode<T> left;
+	    public BinaryTreeNode<T> right;
+
+	    BinaryTreeNode(T data) {
+	        this.data = data;
+	        this.left = null;
+	        this.right = null;
+	    }
+	}
+*/
+
+public class Solution {
+	public static Boolean searchInBST(BinaryTreeNode<Integer> root, int x) {
+		if(root == null) return false;
+		BinaryTreeNode<Integer> cur = root;
+		while(cur != null){
+			if(cur.data == x) return true;
+			else if(cur.data > x) cur = cur.left;
+			else cur = cur.right;
+		}
+		return false;
+	}
+}
