@@ -1,0 +1,44 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/maximum-path-sum-between-two-leaves_8230713?challengeSlug=striver-sde-challenge
+
+
+import java.util.* ;
+import java.io.*; 
+/************************************************************
+
+    Following is the Tree node structure
+	
+	class TreeNode {
+		int data;
+		TreeNode left;
+		TreeNode right;
+
+		TreeNode(int data) {
+			this.data = data;
+			this.left = null;
+			this.right = null;
+		}
+
+	}
+
+************************************************************/
+
+public class Solution {
+	public static long findMaxSumPath(TreeNode root) {
+		
+		long ans[] = new long[2];
+		ans[0] = Integer.MIN_VALUE;
+		findSum(root, ans);
+		if(ans[1] == 1 || ans[0] == Integer.MIN_VALUE) return -1;
+		return ans[0];
+	}
+	public static int findSum(TreeNode root, long []ans){
+		if(root == null) return 0;
+		if(root.left == null && root.right == null){
+			ans[1]++;
+		}
+		int left = findSum(root.left, ans);
+		int right = findSum(root.right, ans);
+		ans[0] = Math.max(ans[0], root.data + left + right);
+		return root.data + Math.max(left , right);
+	}
+}
