@@ -1,0 +1,48 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/construct-binary-tree-from-inorder-and-postorder-traversal_8230837?challengeSlug=striver-sde-challenge
+
+
+/************************************************************
+  
+   Following is the TreeNode class structure
+   
+   class TreeNode<T> { 
+        T data; 
+        TreeNode<T> left;
+        TreeNode<T> right;
+  
+        TreeNode(T data) { 
+            this.data = data; 
+            left = null; 
+            right = null; 
+        }
+   }
+    
+ ************************************************************/
+
+public class Solution {
+	public static TreeNode<Integer> getTreeFromPostorderAndInorder(int[] postOrder, int[] inOrder) {
+    return buildTree(postOrder, 0, postOrder.length-1, inOrder, 0, inOrder.length-1);
+	}
+
+  public static TreeNode<Integer> buildTree(int []postOrder, int pS, int pE, int []inOrder, int iS, int iE){
+    if(pS > pE || iS > iE) return null;
+
+    int data = postOrder[pE];
+    TreeNode<Integer> root = new TreeNode<>(data);
+    int rootIndex = iS;
+    while(rootIndex < iE){
+      if(inOrder[rootIndex] == data){
+        break;
+      }
+      rootIndex++;
+    }
+    int leftSize = rootIndex - iS;
+    root.left = buildTree(postOrder, pS, pS+rootIndex-iS-1, inOrder, iS, rootIndex-1);
+    root.right = buildTree(postOrder, pS+rootIndex-iS, pE-1, inOrder, rootIndex+1, iE);
+
+    //  root.left = build(post, pStart, pStart+rootIndex-inStart-1, in, inStart, rootIndex-1);
+    //     root.right = build(post, pStart+rootIndex-inStart, pEnd-1, in, rootIndex+1, inEnd);
+
+    return root;
+  }
+}
