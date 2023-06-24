@@ -1,0 +1,22 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/floor-in-bst_8230753?challengeSlug=striver-sde-challenge
+
+
+public class Solution {
+
+    public static int floorInBST(TreeNode<Integer> root, int X) {
+        if(root == null) return 0;
+        TreeNode<Integer> cur = root;
+        int ans = root.data;
+        while(cur != null){
+            if((int)cur.data == X){
+                return X;
+            }else if((int)cur.data < X){
+                ans = cur.data;
+                cur = cur.right;
+            }else{
+                cur = cur.left;
+            }
+        }
+        return ans;
+    }
+}
