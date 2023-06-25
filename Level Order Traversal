@@ -1,0 +1,41 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/level-order-traversal_8230716?challengeSlug=striver-sde-challenge
+
+import java.util.* ;
+import java.io.*; 
+/*
+
+	Following is the structure used to represent the Binary Tree Node
+
+	class BinaryTreeNode<T> {
+		T val;
+		BinaryTreeNode<T> left;
+		BinaryTreeNode<T> right;
+
+		public BinaryTreeNode(T val) {
+			this.val = val;
+			this.left = null;
+			this.right = null;
+		}
+	}
+
+*/
+
+import java.util.ArrayList;
+
+public class Solution {
+
+  public static ArrayList<Integer> getLevelOrder(BinaryTreeNode root) {
+    ArrayList<Integer> ans = new ArrayList<>();
+	if(root == null) return ans;
+	Queue<BinaryTreeNode> q = new ArrayDeque<>();
+	q.offer(root);
+	while(!q.isEmpty()){
+		BinaryTreeNode node = q.poll();
+		ans.add((int)node.val);
+		if(node.left != null) q.offer(node.left);
+		if(node.right != null) q.offer(node.right);
+	}
+	return ans;
+  }
+
+}
