@@ -1,0 +1,54 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/top-view-of-binary-tree_8230721?challengeSlug=striver-sde-challenge
+
+import java.util.* ;
+import java.io.*; 
+/************************************************************
+
+    Following is the TreeNode class structure:
+
+    class BinaryTreeNode {
+		int val;
+		BinaryTreeNode left;
+		BinaryTreeNode right;
+
+		BinaryTreeNode(int val) {
+			this.val = val;
+			this.left = null;
+			this.right = null;
+		}
+	}
+
+************************************************************/
+
+public class Solution {
+	public static ArrayList<Integer> getTopView(BinaryTreeNode root) {
+		ArrayList<Integer> ans = new ArrayList<>();
+		if(root == null) return ans;
+		TreeMap<Integer, Integer> map = new TreeMap<>();
+		Queue<Pair> q = new ArrayDeque<>();
+		q.offer(new Pair(root, 0));
+		while(!q.isEmpty()){
+			Pair p = q.poll();
+			BinaryTreeNode node = p.node;
+			int vertical = p.vertical;
+			if(map.get(vertical) == null){
+				map.put(vertical, node.val);
+			}
+			if(node.left != null) q.offer(new Pair(node.left, vertical-1));
+			if(node.right != null) q.offer(new Pair(node.right, vertical+1));
+		}
+		
+		for(int node: map.values()){
+			ans.add(node);
+		}
+		return ans;
+	}
+}
+class Pair{
+	BinaryTreeNode node;
+	int vertical;
+	Pair(BinaryTreeNode node, int vertical){
+		this.node = node;
+		this.vertical = vertical;
+	}
+}
