@@ -1,0 +1,38 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/path-in-a-tree_8230860?challengeSlug=striver-sde-challenge
+
+import java.util.* ;
+import java.io.*; 
+/*   
+    Following is the Binary Tree node structure for referance:
+
+    class TreeNode
+    {
+        int data;
+        TreeNode left, right;
+    
+        public TreeNode(int item)
+        {
+            data = item;
+            left = right = null;
+        }
+    }
+*/
+
+public class Solution {
+    public static ArrayList<Integer> pathInATree(TreeNode root, int x) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        if(root == null) return ans;
+        findPath(root, x, ans);
+        return ans;
+    }
+    public static boolean findPath(TreeNode root, int x, ArrayList<Integer> ans){
+        if(root == null) return false;
+        ans.add(root.data);
+        if(root.data == x) return true;
+        boolean left = findPath(root.left, x, ans);
+        boolean right = findPath(root.right, x, ans);
+        if(left || right) return true;
+        ans.remove(ans.size()-1);
+        return false;
+    }
+}
