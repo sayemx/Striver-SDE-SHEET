@@ -1,0 +1,61 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/vertical-order-traversal_8230758?challengeSlug=striver-sde-challenge
+
+import java.util.* ;
+import java.io.*; 
+/************************************************************
+
+    Following is the TreeNode class structure
+
+    class TreeNode<T> 
+    {
+       public:
+        T data;
+        TreeNode<T> left;
+        TreeNode<T> right;
+
+        TreeNode(T data) 
+        {
+            this.data = data;
+            left = null;
+            right = null;
+        }
+    };
+
+************************************************************/
+
+import java.util.ArrayList;
+
+public class Solution 
+{
+    public static ArrayList<Integer> verticalOrderTraversal(TreeNode<Integer> root) 
+    {
+        ArrayList<Integer> ans = new ArrayList<>();
+        if(root == null) return ans;
+        TreeMap<Integer,ArrayList<Integer>> map = new TreeMap<>();
+        Queue<Pair> q = new ArrayDeque<>();
+        q.offer(new Pair(root, 0));
+        while(!q.isEmpty()){
+            Pair p = q.poll();
+            TreeNode<Integer> node = p.node;
+            int vertical = p.vertical;
+            if(map.get(vertical) == null){
+                map.put(vertical, new ArrayList<>());
+            }
+            map.get(vertical).add(node.data);
+            if(node.left != null) q.offer(new Pair(node.left, vertical-1));
+            if(node.right != null) q.offer(new Pair(node.right, vertical+1));
+        }
+        for(ArrayList<Integer> list : map.values()){
+            ans.addAll(list);
+        }
+        return ans;
+    }
+}
+class Pair{
+    TreeNode<Integer> node;
+    int vertical;
+    Pair(TreeNode<Integer> node, int vertical){
+        this.node = node;
+        this.vertical = vertical;
+    }
+}
