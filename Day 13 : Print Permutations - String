@@ -1,0 +1,27 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/day-13-print-permutations-string_8230703?challengeSlug=striver-sde-challenge
+
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+     public static List<String> findPermutations(String s) {
+        List<String> ans = new ArrayList<>();
+        permute(s.toCharArray(), 0, s.length(), ans);
+        return ans;
+    }
+    public static void permute(char []s, int index, int n, List<String> ans){
+        if(index == n){
+            ans.add(new String(s));
+            return;
+        }
+        for(int i=index; i<n; i++){
+            swap(i, index, s);
+            permute(s, index+1, n, ans);
+            swap(i, index, s);
+        }
+    }
+    public static void swap(int i, int j, char []s){
+        char ch = s[i];
+        s[i] = s[j];
+        s[j] = ch;
+    }
+}
