@@ -1,0 +1,36 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/postorder-traversal_8230858?challengeSlug=striver-sde-challenge
+
+import java.util.* ;
+import java.io.*; 
+/*
+    
+    Following is the Binary Tree node structure:
+
+    public class TreeNode {
+        int data;
+        TreeNode left;
+        TreeNode right;
+        TreeNode() {}
+        TreeNode(int val) { this.data = val; }
+        TreeNode(int val, TreeNode left, TreeNode right) {
+           this.data = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+*/
+
+public class Solution {
+    public static List < Integer > getPostOrderTraversal(TreeNode root) {
+    	List<Integer> ans = new ArrayList<>();
+        postorder(root, ans);
+        return ans;
+    }
+    public static void postorder(TreeNode root, List<Integer> ans){
+        if(root == null) return;
+        postorder(root.left, ans);
+        postorder(root.right, ans);
+        ans.add(root.data);
+    }
+}
