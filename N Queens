@@ -1,0 +1,44 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/n-queens_8230707?challengeSlug=striver-sde-challenge
+
+import java.util.*;
+public class Solution {
+    public static ArrayList<ArrayList<Integer>> solveNQueens(int n) {
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+        for(int i=0; i<n; i++) list.add(new ArrayList<>());
+        for(int i=0; i<n; i++){
+            for(int j=0; j<n; j++){
+                list.get(i).add(0);
+            }
+        }
+        int left[] = new int[n];
+        int uD[] = new int[n*2-1];
+        int lD[] = new int[n*2-1];
+        solve(0, n, ans, list, left, lD, uD);
+        return ans;
+    }
+    public static void solve(int col, int n, ArrayList<ArrayList<Integer>> ans, ArrayList<ArrayList<Integer>> list,
+        int []left, int []lD, int []uD){
+        if(col == n){
+            ArrayList<Integer> temp = new ArrayList<>();
+            for(int i=0; i<n; i++){
+                temp.addAll(list.get(i));
+            }
+            ans.add(temp);
+            return;
+        }
+        for(int row=0; row<n; row++){
+            if(left[row] == 0 && lD[row+col] == 0 && uD[n-1+col-row] == 0){
+                list.get(row).set(col, 1);
+                left[row] = 1;
+                lD[row+col] = 1;
+                uD[n-1+col-row] = 1;
+                solve(col+1, n, ans, list, left, lD, uD);
+                list.get(row).set(col, 0);
+                left[row] = 0;
+                lD[row+col] = 0;
+                uD[n-1+col-row] = 0;
+            }
+        }
+    }
+}
