@@ -1,0 +1,22 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/subsets-ii_8230855?challengeSlug=striver-sde-challenge
+
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static ArrayList<ArrayList<Integer>> uniqueSubsets(int n, int arr[]) {
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        Arrays.sort(arr);
+        subset(arr, 0, n, ans, new ArrayList<Integer>());
+        return ans;
+    }
+    public static void subset(int []a, int index, int n, ArrayList<ArrayList<Integer>> ans, ArrayList<Integer> list){
+        ans.add(new ArrayList<>(list));
+        for(int i=index; i<n; i++){
+            if(i > index && a[i] == a[i-1]) continue;
+            list.add(a[i]);
+            subset(a, i+1, n, ans, list);
+            list.remove(list.size()-1);
+        }
+    }
+
+}
