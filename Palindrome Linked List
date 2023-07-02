@@ -1,0 +1,36 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/palindrome-linked-list_8230717?challengeSlug=striver-sde-challenge
+
+import java.util.* ;
+import java.io.*; 
+/****************************************************************
+
+    Following is the class structure of the LinkedListNode class:
+	
+	class LinkedListNode<T> {
+    	T data;
+    	LinkedListNode<T> next;
+
+    	public LinkedListNode(T data) {
+        	this.data = data;
+    	}
+	}
+
+*****************************************************************/
+
+public class Solution {
+
+	public static boolean isPalindrome(LinkedListNode<Integer> head) {
+		Stack<Long> st = new Stack<>();
+		LinkedListNode<Integer> temp = head;
+		while(temp != null){
+			st.push((long)temp.data);
+			temp = temp.next;
+		}
+		temp = head;
+		while(temp != null){
+			if((long)temp.data != st.pop()) return false;
+			temp = temp.next;
+		}
+		return true;
+	}
+}
