@@ -1,0 +1,23 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/subset-sum_8230859?challengeSlug=striver-sde-challenge
+
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static ArrayList<Integer> subsetSum(int num[]) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        subset(num, 0, ans, 0);
+        Collections.sort(ans);
+        return ans;
+    }
+    public static void subset(int []a, int index, ArrayList<Integer> ans, int sum){
+        if(index == a.length){
+            ans.add(sum);
+            return;
+        }
+        sum += a[index];
+        subset(a, index+1, ans, sum);
+        sum -= a[index];
+        subset(a, index+1, ans, sum);
+    }
+
+}
