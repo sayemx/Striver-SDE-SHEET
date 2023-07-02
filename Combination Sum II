@@ -1,0 +1,30 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/combination-sum-ii_8230820?challengeSlug=striver-sde-challenge
+
+import java.util.*;
+
+public class Solution 
+{
+    public static ArrayList<ArrayList<Integer>> combinationSum2(ArrayList<Integer> arr, int n, int target)
+    {
+        Collections.sort(arr);
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        comb2(arr, 0, n, target, ans, new ArrayList<Integer>());
+        return ans;
+    }
+    public static void comb2(ArrayList<Integer> a, int index, int n, int target, ArrayList<ArrayList<Integer>> ans,
+        ArrayList<Integer> list){
+            // if(index == n){
+                if(target == 0){
+                    ans.add(new ArrayList<>(list));
+                    return;
+                }
+            // }
+            for(int i=index; i<n; i++){
+                if(i > index && a.get(i) == a.get(i-1)) continue;
+                if(a.get(i) > target) break;
+                list.add(a.get(i));
+                comb2(a, i+1, n, target-a.get(i), ans, list);
+                list.remove(list.size()-1);
+            }
+        }
+}
