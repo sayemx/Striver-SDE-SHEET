@@ -1,0 +1,38 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/copy-list-with-random-pointer_8230734?challengeSlug=striver-sde-challenge
+
+import java.io.*;
+import java.util.* ;
+
+/*************************************************************
+
+    Following is the LinkedListNode class structure
+
+    class LinkedListNode<T> {
+	    T data;
+	    LinkedListNode<T> next;
+	    LinkedListNode<T> random;
+
+	    public LinkedListNode(T data) {
+		    this.data = data;
+	    }
+    }
+
+*************************************************************/
+
+public class Solution {
+	public static LinkedListNode<Integer> cloneRandomList(LinkedListNode<Integer> head) {
+		HashMap<LinkedListNode<Integer>,LinkedListNode<Integer>> map = new HashMap<>();
+		LinkedListNode<Integer> temp = head;
+		while(temp != null){
+			map.put(temp, new LinkedListNode<Integer>(temp.data));
+			temp = temp.next;
+		}
+		temp = head;
+		while(temp != null){
+			map.get(temp).next = temp.next != null ? map.get(temp.next) : null;
+			map.get(temp).random = temp.random != null ? map.get(temp.random) : null;
+			temp = temp.next;
+		}
+		return map.get(head);
+	}
+}
