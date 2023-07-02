@@ -1,0 +1,30 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/return-subsets-sum-to-k_8230706?challengeSlug=striver-sde-challenge
+
+import java.util.*;
+public class Solution 
+{
+    public static ArrayList<ArrayList<Integer>> findSubsetsThatSumToK(ArrayList<Integer> arr, int n, int k) 
+	{
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        subset(arr, 0, n, k, 0, new ArrayList<Integer>(), ans);
+        return ans;
+    }
+    public static void subset(ArrayList<Integer> a, int index, int n, int k, int sum, ArrayList<Integer> list,
+        ArrayList<ArrayList<Integer>> ans){
+            if(index == n){
+                if(k == 0 && list.size() > 0){
+                    
+                    ans.add(new ArrayList<>(list));
+                }
+                return;
+            }
+            // if(k >= a.get(index)){
+                list.add(a.get(index));
+                // sum += a.get(index);
+                subset(a, index+1, n, k - a.get(index), sum, list, ans);
+                // sum -= a.get(index);
+                list.remove(list.size()-1);
+            // }
+            subset(a, index+1, n, k, sum, list, ans);
+        }
+}
