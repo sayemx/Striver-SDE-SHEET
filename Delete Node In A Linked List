@@ -1,0 +1,28 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/delete-node-in-a-linked-list_8230813?challengeSlug=striver-sde-challenge
+
+import java.io.*;
+import java.util.* ;
+
+/****************************************************************
+
+    Following is the class structure of the LinkedListNode class:
+
+    class LinkedListNode<T> {
+        T data;
+        LinkedListNode<T> next;
+        LinkedListNode(T data)
+        {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+*****************************************************************/
+
+public class Solution {
+	public static void deleteNode(LinkedListNode<Integer> node) {
+        int data = node.next.data;
+        node.next = node.next.next;
+        node.data = data;
+	}
+}
