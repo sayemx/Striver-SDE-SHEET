@@ -1,0 +1,59 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/add-two-numbers-as-linked-lists_8230833?challengeSlug=striver-sde-challenge
+
+import java.util.* ;
+import java.io.*; 
+/****************************************************************
+
+    Following is the class structure of the Node class:
+
+    class LinkedListNode {
+        int data;
+        LinkedListNode next;
+        
+        public LinkedListNode(int data) {
+            this.data = data;
+        }
+    }
+
+*****************************************************************/
+
+
+public class Solution {
+    static LinkedListNode addTwoNumbers(LinkedListNode head1, LinkedListNode head2) {
+        if(head1 == null) return head2;
+        if(head2 == null) return head1;
+        LinkedListNode res = new LinkedListNode(-1);
+        LinkedListNode temp = res;
+        // head1 = reverse(head1);
+        // head2 = reverse(head2);
+        int carry = 0;
+        while(head1 != null || head2 != null || carry != 0){
+            int sum = 0;
+            if(head1 != null){
+                sum += head1.data;
+                head1 = head1.next;
+            }
+            if(head2 != null){
+                sum += head2.data;
+                head2 = head2.next;
+            }
+            sum += carry;
+            carry = sum / 10;
+            temp.next = new LinkedListNode(sum % 10);
+            temp = temp.next;
+        }
+        // return reverse(res.next);
+        return res.next;
+    }
+    static LinkedListNode reverse(LinkedListNode root){
+        if(root == null || root.next == null) return root;
+        LinkedListNode prev = null, cur = root, next = root;
+        while(cur != null){
+            next = next.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
+        }
+        return prev;
+    }
+}
