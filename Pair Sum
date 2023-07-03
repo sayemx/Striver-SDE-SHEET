@@ -1,0 +1,26 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/pair-sum_8230699?challengeSlug=striver-sde-challenge
+
+import java.io.*;
+import java.util.* ;
+
+public class Solution{
+    public static List<int[]> pairSum(int[] arr, int s) {
+        List<int[]> ans = new ArrayList<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int el : arr){
+            if(map.containsKey(s-el)){
+                int count = map.get(s-el);
+                while(count-- > 0){
+                    if(s-el < el){
+                       ans.add(new int[]{s-el, el});
+                    }else{
+                        ans.add(new int[]{el, s-el});
+                    }
+                }
+            }
+            map.put(el, map.getOrDefault(el, 0)+1);
+        }
+        Collections.sort(ans, (a, b) -> a[0]-b[0]);
+        return ans;
+    }
+}
