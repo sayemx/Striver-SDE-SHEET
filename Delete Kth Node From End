@@ -1,0 +1,63 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/delete-kth-node-from-end_8230725?challengeSlug=striver-sde-challenge
+
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+     public Node prev;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+         this.prev = null;
+     }
+
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+         this.prev = null;
+     }
+
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+         this.prev = next;
+     }
+ };
+
+ *****************************************************************/
+
+public class Solution
+{
+    public static Node removeKthNode(Node head, int K)
+    {
+        if(head == null) return null;
+        int len = 0;
+        Node temp = head;
+        while(temp != null){
+            len++; temp = temp.next;
+        }
+        if(K > len) return null;
+        int i = len - K;
+        temp = head;
+        Node prev = null;
+        while(i > 0){
+            prev = temp;
+            temp = temp.next;
+            i--;
+        }
+        if(prev == null){
+            head = head.next;
+        }
+        else if(temp == null) prev.next = temp;
+        else
+            prev.next = temp.next;
+        return head;
+    }
+}
