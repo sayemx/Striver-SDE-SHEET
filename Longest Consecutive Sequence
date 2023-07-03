@@ -1,0 +1,27 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/longest-consecutive-sequence_8230708?challengeSlug=striver-sde-challenge
+
+import java.io.*;
+import java.util.* ;
+
+public class Solution {
+    public static int lengthOfLongestConsecutiveSequence(int[] arr, int N) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int el : arr){
+            map.put(el, 1);
+        }
+        int ans = 0;
+        for(int el : arr){
+            if(map.get(el-1) == null){
+                int count = 1; 
+                int temp = el + 1;
+                while(map.get(temp) != null){
+                    count++;
+                    map.remove(temp); 
+                    temp++;
+                }
+                ans = Math.max(ans, count);
+            }
+        }
+        return ans;
+    }
+}
