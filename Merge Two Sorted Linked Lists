@@ -1,0 +1,40 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/merge-two-sorted-linked-lists_8230729?challengeSlug=striver-sde-challenge
+
+import java.io.*;
+import java.util.* ;
+
+/************************************************************
+
+    Following is the linked list node structure:
+    
+    class LinkedListNode<T> {
+        T data;
+        LinkedListNode<T> next;
+
+        public LinkedListNode(T data) {
+            this.data = data;
+        }
+    }
+
+************************************************************/
+
+public class Solution {
+	public static LinkedListNode<Integer> sortTwoLists(LinkedListNode<Integer> first, LinkedListNode<Integer> second) {
+		LinkedListNode<Integer> dummy = new LinkedListNode<Integer>(-1);
+        LinkedListNode<Integer> res = dummy;
+        while(first != null && second != null){
+            if(first.data < second.data){
+                dummy.next = first;
+                dummy = dummy.next;
+                first = first.next;
+            }else{
+                dummy.next = second;
+                dummy = dummy.next;
+                second = second.next;
+            }
+        }    
+        if(first != null) dummy.next = first;
+        else if(second != null) dummy.next = second;
+        return res.next;    
+	}
+}
