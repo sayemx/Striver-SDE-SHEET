@@ -1,0 +1,19 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/find-duplicate-in-array_8230816?challengeSlug=striver-sde-challenge
+
+import java.io.*;
+import java.util.* ;
+
+import java.util.ArrayList;
+
+public class Solution{
+    public static int findDuplicate(ArrayList<Integer> arr, int n){
+        int hash[] = new int[n];
+        for(int el : arr){
+            hash[el]++;
+        }
+        for(int i=0; i<n; i++){
+            if(hash[i] > 1) return i;
+        }
+        return -1;
+    }
+}
