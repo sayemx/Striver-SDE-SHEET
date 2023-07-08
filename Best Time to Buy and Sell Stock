@@ -1,0 +1,17 @@
+Problem Link -> https://www.codingninjas.com/studio/problems/best-time-to-buy-and-sell-stock_8230746?challengeSlug=striver-sde-challenge
+
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution{
+    public static int maximumProfit(ArrayList<Integer> prices){
+        int ans = 0;
+        int min = prices.get(0);
+        for(int i=1; i<prices.size(); i++){
+            min = Math.min(min, prices.get(i));
+            ans = Math.max(ans, prices.get(i) - min);
+        }
+        return ans;
+    }
+}
